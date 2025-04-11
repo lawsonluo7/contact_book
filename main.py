@@ -12,19 +12,24 @@ class Contact:
 
 class ContactBook:
     def __init__(self, file_obj: typing.Optional[typing.BinaryIO] = None):  # pickle load ContactBook obj from file, new empty instance if file is None
-        pass
+        self.contacts: list[Contact] = []
+        if file_obj:
+            self.contacts = pickle.load(file_obj)
 
     def save(self, file_obj: typing.BinaryIO) -> None:  # pickle dump self to file
-        pass
+        pickle.dump(self, file_obj)
 
     def add(self, contact: Contact) -> None:  # C
-        pass
+        self.contacts.append(contact)
 
-    def read(self, index: typing.Optional[int] = None) -> typing.Optional[Contact | list[Contact]]:  # R, if index is None, return all contacts as list
-        pass
+    def read(self, index: typing.Optional[int] = None) -> Contact | list[Contact]:  # R, if index is None, return all contacts as list
+        if index is None:
+            return self.contacts
+        else:
+            return self.contacts[index]
 
     def modify(self, index: int, contact: Contact) -> None:  # U
-        pass
+        self.contacts[index] = contact
 
     def delete(self, index: int) -> None:  # D
-        pass
+        self.contacts.pop(index)
