@@ -31,6 +31,9 @@ contructor loads ContactBook object from file provided, new empty instance if fi
 import contact_book
 c = contact_book.Contact(name, phone_number, email)
 ```
+Returns `None` when invalid, which happens when:
+- `name` is empty
+- no contact info is provided
 ### Methods Include:
 #### `ContactBook.save(file_obj: typing.BinaryIO) -> None`
 takes a already opened binary file, and writes the instance's data in
